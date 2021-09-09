@@ -1,9 +1,17 @@
-import React, { HTMLProps, PropsWithChildren } from 'react';
+import React from 'react';
 
-const Button: React.FC<
-  PropsWithChildren<Props & HTMLProps<HTMLButtonElement>>
-> = ({ children, ...props }) => {
-  return <button {...props}>{children}</button>;
+type Props = {
+  onClick?: () => void;
+  role?: string;
+  type?: 'submit' | 'button' | 'reset';
+};
+
+const Button: React.FC<Props> = ({ children, onClick, role, type }) => {
+  return (
+    <button onClick={onClick} role={role} type={type}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;
