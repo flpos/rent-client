@@ -9,7 +9,7 @@ describe('input component', () => {
   it('calls back with value on change', () => {
     const onChangeMock = jest.fn();
     const screen = render(
-      <Input onChange={onChangeMock} data-testid='input-test' />
+      <Input onChange={onChangeMock} dataTestid='input-test' />
     );
     const input = screen.getByTestId('input-test');
 

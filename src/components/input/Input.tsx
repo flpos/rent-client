@@ -1,16 +1,18 @@
-import React, { HTMLProps } from "react";
+import React from 'react';
 
 type Props = {
   onChange?: (value: string) => void;
+  placeholder?: string;
+  dataTestid?: string;
 };
 
-const Input: React.FC<Props & HTMLProps<HTMLInputElement>> = (props) => {
+const Input: React.FC<Props> = ({ onChange, placeholder, dataTestid }) => {
   return (
     <input
-      {...props}
+      data-testid={dataTestid}
+      placeholder={placeholder}
       onChange={(event) => {
-        if (typeof props.onChange === "function")
-          props.onChange(event.target.value);
+        if (typeof onChange === 'function') onChange(event.target.value);
       }}
     />
   );
