@@ -47,7 +47,7 @@ describe('Login page', () => {
 
     const inputData = {
       email: 'abc@def.com',
-      username: 'abc',
+      name: 'abc',
     };
     const userNameInput = screen.getByPlaceholderText(/username/i);
     const emailInput = screen.getByPlaceholderText(/email/i);
@@ -55,7 +55,7 @@ describe('Login page', () => {
 
     act(() => {
       fireEvent.change(userNameInput, {
-        target: { value: inputData.username },
+        target: { value: inputData.name },
       });
       fireEvent.change(emailInput, {
         target: { value: inputData.email },
