@@ -16,12 +16,12 @@ const LoginPage: React.FC<Props> = ({
   userPersistenceService,
   history,
 }) => {
-  const [username, setUsername] = React.useState('');
+  const [name, setUsername] = React.useState('');
   const [email, setEmail] = React.useState('');
 
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault();
-    loginUseCase.run({ email, username }).then((user) => {
+    loginUseCase.run({ email, name }).then((user) => {
       userPersistenceService.set(user);
       history.push('/car');
     });
