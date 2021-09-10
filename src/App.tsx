@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { UserPersistenceService } from './infra/services/user-persistence.service';
 import { ConfirmReservationAxiosUseCase } from './infra/use-cases/axios/confirm-reservation-axios.usecase';
 import { GetCarDetailsAxiosUseCase } from './infra/use-cases/axios/get-car-details-axios.usecase';
