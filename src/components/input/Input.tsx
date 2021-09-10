@@ -1,3 +1,4 @@
+import { Input as MUIInput } from '@material-ui/core';
 import React, { HTMLInputTypeAttribute } from 'react';
 
 type Props = {
@@ -18,7 +19,7 @@ const Input: React.FC<Props> = ({
   value,
 }) => {
   return (
-    <input
+    <MUIInput
       type={type}
       data-testid={dataTestid}
       placeholder={placeholder}
