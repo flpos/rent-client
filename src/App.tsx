@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import { UserPersistenceService } from './infra/services/user-persistence.service';
-import { ConfirmReservationMockUseCase } from './infra/use-cases/mock/confirm-reservation-mock.usecase';
-import { GetCarDetailsMockUseCase } from './infra/use-cases/mock/get-car-details-mock.usecase';
-import { GetCarListMockUseCase } from './infra/use-cases/mock/get-car-list-mock.usecase';
-import { LoginMockUseCase } from './infra/use-cases/mock/login-mock.usecase';
+import { ConfirmReservationAxiosUseCase } from './infra/use-cases/axios/confirm-reservation-axios.usecase';
+import { GetCarDetailsAxiosUseCase } from './infra/use-cases/axios/get-car-details-axios.usecase';
+import { GetCarListAxiosUseCase } from './infra/use-cases/axios/get-car-list-axios.usecase';
+import { LoginAxiosUseCase } from './infra/use-cases/axios/login-axios.usecase';
 import Routes from './routes';
 
-const confirmReservationUseCase = new ConfirmReservationMockUseCase();
-const getCarDetailsUseCase = new GetCarDetailsMockUseCase();
-const getCarListUseCase = new GetCarListMockUseCase();
-const loginUseCase = new LoginMockUseCase();
+const confirmReservationUseCase = new ConfirmReservationAxiosUseCase();
+const getCarDetailsUseCase = new GetCarDetailsAxiosUseCase();
+const getCarListUseCase = new GetCarListAxiosUseCase();
+const loginUseCase = new LoginAxiosUseCase();
 const userPersistenceService = new UserPersistenceService();
 
 function App() {
