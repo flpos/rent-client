@@ -1,4 +1,4 @@
-import { Input as MUIInput } from '@material-ui/core';
+import { TextField as MUIInput } from '@material-ui/core';
 import React, { HTMLInputTypeAttribute } from 'react';
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
   dataTestid?: string;
   id?: string;
   value?: string | number | readonly string[];
+  error?: string;
 };
 
 const Input: React.FC<Props> = ({
@@ -17,6 +18,7 @@ const Input: React.FC<Props> = ({
   dataTestid,
   id,
   value,
+  error,
 }) => {
   return (
     <MUIInput
@@ -28,6 +30,8 @@ const Input: React.FC<Props> = ({
       }}
       id={id}
       value={value}
+      error={!!error}
+      helperText={error}
     />
   );
 };
