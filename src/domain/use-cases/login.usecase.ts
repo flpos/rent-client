@@ -1,5 +1,5 @@
 export type LoginUseCaseInput = {
-  username: string;
+  name: string;
   email: string;
 };
 export type LoginUseCaseOutput = LoginUseCaseInput & {

@@ -20,7 +20,7 @@ const Header: React.FC<Props> = ({ userPersistenceService, history }) => {
 
   return (
     <header>
-      <div>Hello {user?.username}!</div>
+      <div>Hello {user?.name}!</div>
       <Button onClick={handleLogOut}>Log Out</Button>
     </header>
   );
