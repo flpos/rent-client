@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Card from '.';
+import CarCard from '.';
 
 let props = {
   id: 'some-id',
@@ -11,12 +11,12 @@ let props = {
 let screen: ReturnType<typeof render>;
 
 beforeEach(() => {
-  screen = render(<Card {...props} />);
+  screen = render(<CarCard {...props} />);
 });
 
 describe('card component', () => {
   it('is defined', () => {
-    expect(Card).toBeDefined();
+    expect(CarCard).toBeDefined();
   });
   it('must show the image of the car', () => {
     const image = screen.getByAltText(/car/);
