@@ -23,7 +23,7 @@ describe('CarList page', () => {
   });
   it('renders the car container component', async () => {
     screen = render(<CarListPage getCarListUseCase={useCase} />);
-    const elements = await screen.findAllByAltText(/car/i);
+    const elements = await screen.findAllByTitle(/car/i);
 
     expect(elements.length).toBe(2);
   });

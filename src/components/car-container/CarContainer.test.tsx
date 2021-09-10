@@ -24,7 +24,7 @@ describe('car container component', () => {
   });
   it('renders a list of cars', () => {
     const screen = render(<CarContainer cars={inputData} />);
-    const carImages = screen.getAllByAltText(/car/);
+    const carImages = screen.getAllByTitle(/car/);
 
     expect(carImages.length).toBe(inputData.length);
   });

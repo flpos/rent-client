@@ -1,6 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { History } from 'history';
 import { act } from 'react-dom/test-utils';
+import { MemoryRouter } from 'react-router';
 import LoginPage from '.';
 import { LoginUseCase } from '../../domain/use-cases/login.usecase';
 import { UserPersistenceService } from '../../infra/services/user-persistence.service';
@@ -18,11 +19,13 @@ beforeEach(() => {
     push: jest.fn(),
   } as unknown as History;
   screen = render(
-    <LoginPage
-      loginUseCase={loginUseCase}
-      userPersistenceService={userPersistenceService}
-      history={history}
-    />
+    <MemoryRouter>
+      <LoginPage
+        loginUseCase={loginUseCase}
+        userPersistenceService={userPersistenceService}
+        history={history}
+      />
+    </MemoryRouter>
   );
 });
 
@@ -31,11 +34,11 @@ describe('Login page', () => {
     expect(LoginPage).toBeDefined();
   });
   it('has a username input', () => {
-    const userNameInput = screen.getByPlaceholderText(/username/i);
+    const userNameInput = screen.getByPlaceholderText(/name/i);
     expect(userNameInput).toBeInTheDocument();
   });
   it('has a email input', () => {
-    const emailInput = screen.getByPlaceholderText(/email/i);
+    const emailInput = screen.getByPlaceholderText(/e-mail/i);
     expect(emailInput).toBeInTheDocument();
   });
   it('has a submit button', () => {
@@ -49,8 +52,8 @@ describe('Login page', () => {
       email: 'abc@def.com',
       name: 'abc',
     };
-    const userNameInput = screen.getByPlaceholderText(/username/i);
-    const emailInput = screen.getByPlaceholderText(/email/i);
+    const userNameInput = screen.getByPlaceholderText(/name/i);
+    const emailInput = screen.getByPlaceholderText(/e-mail/i);
     const submitButton = screen.getByRole('submit');
 
     act(() => {

@@ -19,7 +19,7 @@ describe('card component', () => {
     expect(CarCard).toBeDefined();
   });
   it('must show the image of the car', () => {
-    const image = screen.getByAltText(/car/);
+    const image = screen.getByTitle(/car/);
     expect(image).toBeInTheDocument();
   });
   it('must show the brand, year and model of the car', () => {
@@ -33,7 +33,7 @@ describe('card component', () => {
     expect(year).toBeInTheDocument();
   });
   it('must contain a link to the details page', () => {
-    const link = screen.getByText(/details/i) as HTMLAnchorElement;
+    const link = screen.getByText(/more/i) as HTMLAnchorElement;
     const regex = new RegExp(props.id);
     expect(regex.test(link.href)).toBeTruthy();
   });
