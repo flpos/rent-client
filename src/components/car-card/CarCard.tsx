@@ -23,7 +23,7 @@ const Card: React.FC<Props> = ({ id, brand, model, year, imageUrl }) => {
           Year: <span>{year}</span>
         </li>
       </ul>
-      <a href={`car/${id}`}>Details</a>
+      <a href={`/car/${id}`}>Details</a>
     </>
   );
 };
