@@ -1,46 +1,34 @@
-# Getting Started with Create React App
+# Rent-client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Cliente de aluguel de carros
 
-## Available Scripts
+## Como iniciar a aplicação
 
-In the project directory, you can run:
+### Docker compose
 
-### `yarn start`
+O comando do docker compose faz um build e utiliza o nginx para servir os arquivos estáticos, nesse modo o front utiliza um proxy reverso para acessar a url do backend, podendo gerar um build e mudar a url conforme o necessário, utilizando variável de ambiente para o docker.
+```sh
+docker-compose up
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### yarn
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Outra forma, mais simples, de se iniciar, é utilizando o yarn
+```sh
+yarn start
+```
+desta forma a url do backend fica configurada no arquivo .env, na raiz do projeto.
 
-### `yarn test`
+## Aplicação
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Nessa aplicação utilizei o create-react-app para iniciar o projeto, com o template de typescript. Utilizei também a lib de componentes Material UI, o foco do projeto foi na organização de código e alguns conceitos de arquitetura limpa.
 
-### `yarn build`
+Utilizo jest com testing-library para os testes, o projeto foi feito guiado por TDD.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Observações e considerações
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Não foi implementado autenticação no projeto, o que define se o usuário está logado é um objeto no localStorage.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Não há feedback de erros de comunicação com a api, apesar de essencial numa situação real, dei priorida a outros aspectos da aplicação.
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+O aspecto da aplicação é simples, visualmente é o mínimo para chegar ao objetivo (fluxo de aluguel de carros)
