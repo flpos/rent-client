@@ -1,7 +1,9 @@
+import { AppBar, Container, Toolbar, Typography } from '@material-ui/core';
 import { History } from 'history';
 import React from 'react';
 import { UserPersistenceService } from '../../infra/services/user-persistence.service';
 import Button from '../button';
+import useStyles from './styles';
 
 type Props = {
   userPersistenceService: UserPersistenceService;
@@ -18,11 +20,20 @@ const Header: React.FC<Props> = ({ userPersistenceService, history }) => {
     history.push('/login');
   };
 
+  const styles = useStyles();
+
   return (
-    <header>
-      <div>Hello {user?.name}!</div>
-      <Button onClick={handleLogOut}>Log Out</Button>
-    </header>
+    <AppBar position='sticky'>
+      <Container>
+        <Toolbar>
+          <Typography variant='h6'>Rent a Car!</Typography>
+          <Typography variant='h6' className={styles.text}>
+            Hello {user?.name}!
+          </Typography>
+          <Button onClick={handleLogOut}>Log Out</Button>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 
