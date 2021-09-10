@@ -42,10 +42,14 @@ const Header: React.FC<Props> = ({ userPersistenceService, history }) => {
             </Button>
           )}
           <Typography variant='h6'>Rent a Car!</Typography>
-          <Typography variant='h6' className={styles.text}>
-            Hello {user?.name}!
-          </Typography>
-          <Button onClick={handleLogOut}>Log Out</Button>
+          {user && (
+            <>
+              <Typography variant='h6' className={styles.text}>
+                Hello {user?.name}!
+              </Typography>
+              <Button onClick={handleLogOut}>Log Out</Button>
+            </>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

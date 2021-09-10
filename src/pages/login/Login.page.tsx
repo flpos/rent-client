@@ -1,10 +1,11 @@
+import { Box, Container } from '@material-ui/core';
+import { History } from 'history';
 import React, { FormEventHandler } from 'react';
 import Button from '../../components/button';
+import Header from '../../components/header';
 import Input from '../../components/input';
 import { LoginUseCase } from '../../domain/use-cases/login.usecase';
 import { UserPersistenceService } from '../../infra/services/user-persistence.service';
-import { History } from 'history';
-import { Box, Container } from '@material-ui/core';
 import useStyles from './styles';
 
 type Props = {
@@ -32,20 +33,26 @@ const LoginPage: React.FC<Props> = ({
   const styles = useStyles();
 
   return (
-    <Container className={styles.container}>
-      <form onSubmit={handleSubmit}>
-        <Box display='flex' flexDirection='column' gridGap='20px'>
-          <Input
-            placeholder='username'
-            onChange={(value) => setUsername(value)}
-          />
-          <Input placeholder='email' onChange={(value) => setEmail(value)} />
-          <Button role='submit' type='submit'>
-            Send
-          </Button>
-        </Box>
-      </form>
-    </Container>
+    <>
+      <Header
+        userPersistenceService={userPersistenceService}
+        history={history}
+      />
+      <Container className={styles.container}>
+        <form onSubmit={handleSubmit}>
+          <Box display='flex' flexDirection='column' gridGap='20px'>
+            <Input
+              placeholder='Name'
+              onChange={(value) => setUsername(value)}
+            />
+            <Input placeholder='E-mail' onChange={(value) => setEmail(value)} />
+            <Button role='submit' type='submit'>
+              Login / Create
+            </Button>
+          </Box>
+        </form>
+      </Container>
+    </>
   );
 };
 
