@@ -16,7 +16,7 @@ const CarListPage: React.FC<Props> = ({ getCarListUseCase }) => {
     getCarListUseCase
       .run()
       .then(({ cars }) => {
-        if (cars.length > 0) {
+        if (cars?.length > 0) {
           setCars(cars);
         }
       })
