@@ -3,6 +3,7 @@ import {
   Card as MUICard,
   CardContent,
   CardMedia,
+  Link,
   Typography,
 } from '@material-ui/core';
 import useStyles from './styles';
@@ -35,7 +36,7 @@ const Card: React.FC<Props> = ({ id, brand, model, year, imageUrl }) => {
         <Typography>
           Year: <span>{year}</span>
         </Typography>
-        <a href={`/car/${id}`}>Details</a>
+        <Link href={`/car/${id}`}>More...</Link>
       </CardContent>
     </MUICard>
   );

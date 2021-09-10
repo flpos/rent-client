@@ -6,6 +6,7 @@ type Props = {
   role?: string;
   type?: 'submit' | 'button' | 'reset';
   color?: 'default' | 'inherit' | 'primary' | 'secondary';
+  className?: string;
 };
 
 const Button: React.FC<Props> = ({
@@ -14,6 +15,7 @@ const Button: React.FC<Props> = ({
   role,
   type,
   color = 'default',
+  className,
 }) => {
   return (
     <MUIButton
@@ -22,6 +24,7 @@ const Button: React.FC<Props> = ({
       onClick={onClick}
       role={role}
       type={type}
+      className={className}
     >
       {children}
     </MUIButton>
