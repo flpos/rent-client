@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import { ConfirmReservationUseCase } from '../domain/use-cases/confirm-reservation.usecase';
