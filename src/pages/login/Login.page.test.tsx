@@ -2,14 +2,22 @@ import { fireEvent, render } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import LoginPage from '.';
 import { LoginUseCase } from '../../domain/use-cases/login.usecase';
-import { LoginMockUsecase } from '../../infra/use-cases/mock/login-mock.usecase';
+import { UserPersistenceService } from '../../infra/services/user-persistence.service';
+import { LoginMockUseCase } from '../../infra/use-cases/mock/login-mock.usecase';
 
 let loginUseCase: LoginUseCase;
+let userPersistenceService: UserPersistenceService;
 let screen: ReturnType<typeof render>;
 
 beforeEach(() => {
-  loginUseCase = new LoginMockUsecase();
-  screen = render(<LoginPage loginUseCase={loginUseCase} />);
+  loginUseCase = new LoginMockUseCase();
+  userPersistenceService = new UserPersistenceService();
+  screen = render(
+    <LoginPage
+      loginUseCase={loginUseCase}
+      userPersistenceService={userPersistenceService}
+    />
+  );
 });
 
 describe('Login page', () => {
