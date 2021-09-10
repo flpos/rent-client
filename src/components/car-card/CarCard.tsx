@@ -1,4 +1,11 @@
 import React from 'react';
+import {
+  Card as MUICard,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@material-ui/core';
+import useStyles from './styles';
 
 type Props = {
   id: string;
@@ -9,22 +16,28 @@ type Props = {
 };
 
 const Card: React.FC<Props> = ({ id, brand, model, year, imageUrl }) => {
+  const styles = useStyles();
+
   return (
-    <>
-      <img src={imageUrl} alt={`${year} ${brand} ${model} car`} />
-      <ul>
-        <li>
+    <MUICard className={styles.card}>
+      <CardMedia
+        className={styles.image}
+        image={imageUrl}
+        title={`${year} ${brand} ${model} car`}
+      />
+      <CardContent className={styles.content}>
+        <Typography>
           Brand: <span>{brand}</span>
-        </li>
-        <li>
+        </Typography>
+        <Typography>
           Model: <span>{model}</span>
-        </li>
-        <li>
+        </Typography>
+        <Typography>
           Year: <span>{year}</span>
-        </li>
-      </ul>
-      <a href={`/car/${id}`}>Details</a>
-    </>
+        </Typography>
+        <a href={`/car/${id}`}>Details</a>
+      </CardContent>
+    </MUICard>
   );
 };
 
