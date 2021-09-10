@@ -1,10 +1,13 @@
+import { Container, Box, Typography, List, ListItem } from '@material-ui/core';
 import React, { FormEventHandler } from 'react';
 import { useParams } from 'react-router';
 import Input from '../../components/input';
+import Button from '../../components/button';
 import { CarDetail } from '../../domain/entities/car.entity';
 import { ConfirmReservationUseCase } from '../../domain/use-cases/confirm-reservation.usecase';
 import { GetCarDetailsUseCase } from '../../domain/use-cases/get-car-details.usecase';
 import { UserPersistenceService } from '../../infra/services/user-persistence.service';
+import useStyles from './styles';
 
 type Props = {
   getCarDetailsUseCase: GetCarDetailsUseCase;
@@ -54,34 +57,41 @@ const CarDetailsPage: React.FC<Props> = ({
     });
   };
 
+  const styles = useStyles();
+
   if (isLoading) return <div title='loading' />;
   if (!car) return <div>Car Not Found</div>;
   const { brand, color, imageUrl, kilometers, model, year } = car;
   return (
-    <>
-      <div>
-        <img src={imageUrl} alt={`${year} ${brand} ${model} car`} />
-        <ul>
-          <li>
-            Brand:
+    <Container maxWidth='md' className={styles.root}>
+      <Box className={styles.row}>
+        <img
+          className={styles.image}
+          src={imageUrl}
+          alt={`${year} ${brand} ${model} car`}
+        />
+        <List className={styles.list}>
+          <Typography variant='h4'>Details</Typography>
+          <ListItem className={styles.listItem} divider>
+            Brand
             <span>{brand}</span>
-          </li>
-          <li>
-            Model: <span>{model}</span>
-          </li>
-          <li>
-            Year: <span>{year}</span>
-          </li>
-          <li>
-            Color: <span>{color}</span>
-          </li>
-          <li>
-            KM: <span>{kilometers}</span>
-          </li>
-        </ul>
-      </div>
-      <form onSubmit={handleConfirmReservation}>
-        <h2>Reservation</h2>
+          </ListItem>
+          <ListItem className={styles.listItem} divider>
+            Model <span>{model}</span>
+          </ListItem>
+          <ListItem className={styles.listItem} divider>
+            Year <span>{year}</span>
+          </ListItem>
+          <ListItem className={styles.listItem} divider>
+            Color <span>{color}</span>
+          </ListItem>
+          <ListItem className={styles.listItem}>
+            KM <span>{kilometers}</span>
+          </ListItem>
+        </List>
+      </Box>
+      <form className={styles.reservation} onSubmit={handleConfirmReservation}>
+        <Typography variant='h5'>Reservation</Typography>
         <label htmlFor='start-date'>Initial Date</label>
         <Input
           type='date'
@@ -94,9 +104,11 @@ const CarDetailsPage: React.FC<Props> = ({
           id='end-date'
           onChange={(value) => setEnd(new Date(value))}
         />
-        <Input type='submit' value='Confirm reservation' />
+        <Button type='submit' color='primary'>
+          Confirm reservation
+        </Button>
       </form>
-    </>
+    </Container>
   );
 };
 
