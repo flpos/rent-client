@@ -3,24 +3,28 @@ import Button from '../../components/button';
 import Input from '../../components/input';
 import { LoginUseCase } from '../../domain/use-cases/login.usecase';
 import { UserPersistenceService } from '../../infra/services/user-persistence.service';
+import { History } from 'history';
 
 type Props = {
   loginUseCase: LoginUseCase;
   userPersistenceService: UserPersistenceService;
+  history: History;
 };
 
 const LoginPage: React.FC<Props> = ({
   loginUseCase,
   userPersistenceService,
+  history,
 }) => {
   const [username, setUsername] = React.useState('');
   const [email, setEmail] = React.useState('');
 
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault();
-    loginUseCase
-      .run({ email, username })
-      .then((user) => userPersistenceService.set(user));
+    loginUseCase.run({ email, username }).then((user) => {
+      userPersistenceService.set(user);
+      history.push('/car');
+    });
   };
 
   return (

@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Redirect, Switch } from 'react-router-dom';
 import { ConfirmReservationUseCase } from '../domain/use-cases/confirm-reservation.usecase';
 import { GetCarDetailsUseCase } from '../domain/use-cases/get-car-details.usecase';
 import { GetCarListUseCase } from '../domain/use-cases/get-car-list.usecase';
@@ -10,6 +10,7 @@ import CarDetailsPage from '../pages/CarDetailsPage';
 import CarListPage from '../pages/CarListPage';
 import LoginPage from '../pages/login';
 import history from '../infra/services/history.service';
+import Header from '../components/header';
 
 type Props = {
   loginUseCase: LoginUseCase;
@@ -26,32 +27,65 @@ const Routes: React.FC<Props> = ({
   getCarDetailsUseCase,
   userPersistenceService,
 }) => {
+  const isLogged = React.useCallback(
+    () => !!userPersistenceService.get(),
+    [userPersistenceService]
+  );
   return (
     <Router history={history}>
-      <Route
-        path='/login'
-        render={() => (
-          <LoginPage
-            loginUseCase={loginUseCase}
-            userPersistenceService={userPersistenceService}
-          />
-        )}
-      />
-      <Route
-        path='/car'
-        render={() => <CarListPage getCarListUseCase={getCarListUseCase} />}
-        exact
-      />
-      <Route
-        path='/car/:id'
-        render={() => (
-          <CarDetailsPage
-            confirmReservationUseCase={confirmReservationUseCase}
-            getCarDetailsUseCase={getCarDetailsUseCase}
-            userPersistenceService={userPersistenceService}
-          />
-        )}
-      />
+      <Switch>
+        <Route
+          path='/'
+          exact
+          render={() => {
+            if (isLogged()) {
+              return <Redirect to='/car' />;
+            } else {
+              return <Redirect to='/login' />;
+            }
+          }}
+        />
+        <Route
+          path='/login'
+          render={() => (
+            <LoginPage
+              loginUseCase={loginUseCase}
+              userPersistenceService={userPersistenceService}
+              history={history}
+            />
+          )}
+        />
+        <Route
+          path='/car'
+          render={() => (
+            <>
+              <Header
+                history={history}
+                userPersistenceService={userPersistenceService}
+              />
+              <CarListPage getCarListUseCase={getCarListUseCase} />
+            </>
+          )}
+          exact
+        />
+        <Route
+          path='/car/:id'
+          render={() => (
+            <>
+              <Header
+                history={history}
+                userPersistenceService={userPersistenceService}
+              />
+              <CarDetailsPage
+                confirmReservationUseCase={confirmReservationUseCase}
+                getCarDetailsUseCase={getCarDetailsUseCase}
+                userPersistenceService={userPersistenceService}
+              />
+            </>
+          )}
+        />
+        <Redirect to='/' />
+      </Switch>
     </Router>
   );
 };
