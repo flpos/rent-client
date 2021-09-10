@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
+import { History } from 'history';
 import { act } from 'react-dom/test-utils';
 import LoginPage from '.';
 import { LoginUseCase } from '../../domain/use-cases/login.usecase';
@@ -7,15 +8,20 @@ import { LoginMockUseCase } from '../../infra/use-cases/mock/login-mock.usecase'
 
 let loginUseCase: LoginUseCase;
 let userPersistenceService: UserPersistenceService;
+let history: History;
 let screen: ReturnType<typeof render>;
 
 beforeEach(() => {
   loginUseCase = new LoginMockUseCase();
   userPersistenceService = new UserPersistenceService();
+  history = {
+    push: jest.fn(),
+  } as unknown as History;
   screen = render(
     <LoginPage
       loginUseCase={loginUseCase}
       userPersistenceService={userPersistenceService}
+      history={history}
     />
   );
 });
