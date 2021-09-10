@@ -1,9 +1,17 @@
-import { AppBar, Container, Toolbar, Typography } from '@material-ui/core';
+import {
+  AppBar,
+  Container,
+  Icon,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
 import { History } from 'history';
 import React from 'react';
 import { UserPersistenceService } from '../../infra/services/user-persistence.service';
 import Button from '../button';
 import useStyles from './styles';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useRouteMatch } from 'react-router';
 
 type Props = {
   userPersistenceService: UserPersistenceService;
@@ -20,12 +28,19 @@ const Header: React.FC<Props> = ({ userPersistenceService, history }) => {
     history.push('/login');
   };
 
+  const match = useRouteMatch('/car/:id');
+
   const styles = useStyles();
 
   return (
     <AppBar position='sticky'>
       <Container>
         <Toolbar>
+          {match?.isExact && (
+            <Button className={styles.button} onClick={() => history.goBack()}>
+              <Icon component={ArrowBackIcon} />
+            </Button>
+          )}
           <Typography variant='h6'>Rent a Car!</Typography>
           <Typography variant='h6' className={styles.text}>
             Hello {user?.name}!
